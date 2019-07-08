@@ -1,0 +1,9 @@
+- hosts: vultr  
+#   connection: local 
+#   become: true
+  gather_facts: no
+  roles:
+    # - vhost
+    # - common 
+    # - shadowsocks
+    # - vultr-firewall

@@ -1,0 +1,48 @@
+---
+# - name: Add tcp-bbr to kernel
+#   lineinfile:
+#     path: /etc/sysctl.conf
+#     line: "{{ item }}"
+#   with_items:
+#     - net.core.default_qdisc=fq
+#     - net.ipv4.tcp_congestion_control=bbr
+#   when: kernel_version_more_than_4_9
+
+# - name: Enable tcp-bbr
+#   shell: sysctl -p
+
+- name: Install python and python-pip
+  yum:
+    name:
+      - python
+      - python-pip
+      - '@Development Tools'
+    update_cache: yes
+    state: present
+
+- name: Upgrade pip
+  shell: pip install --upgrade pip
+
+- name: Install setuptools package
+  pip:
+    name: setuptools
+
+- name: Install shadowsocks package
+  pip:
+    name: shadowsocks
+
+- name: Get ssserver path
+  shell: which ssserver
+  register: ssserver
+
+- name: Configure shadowsocks server
+  template: src=shadowsocks.json.j2 dest=/etc/shadowsocks.json
+
+- name: Create shadowsocks service
+  template: src=shadowsocks.service.j2 dest=/etc/systemd/system/shadowsocks.service
+
+- name: Restart and enable shadowsocks
+  service:
+    name: shadowsocks
+    state: started
+    enabled: yes

@@ -1,0 +1,3 @@
+ss_port: 443
+ss_secret: shadowsocks.json.j2
+ss_method: aes-256-cfb

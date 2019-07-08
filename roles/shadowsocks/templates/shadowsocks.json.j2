@@ -1,0 +1,8 @@
+{
+  "server":"{{ groups['vultr'][0] }}",
+  "server_port":{{ ss_port | replace('\n', '')}},
+  "local_port":1080,
+  "password":"{{ ss_secret | replace('\n', '') }}",
+  "timeout":600,
+  "method":"{{ ss_method | replace('\n', '') }}"
+}

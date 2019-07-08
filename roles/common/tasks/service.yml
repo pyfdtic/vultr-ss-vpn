@@ -1,0 +1,8 @@
+- name: disable useless service
+  service:
+    name: '{{ item }}'
+    state: absent
+    enable: no
+  with_items:
+    - postfix
+    - firewalld

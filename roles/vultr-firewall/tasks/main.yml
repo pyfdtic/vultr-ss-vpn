@@ -1,0 +1,35 @@
+---
+# tasks file for vultr-firewall
+- name: ensure 'ss' firewall group is present
+  local_action:
+    module: vultr_firewall_group
+    name: '{{ SHADOWSOCKS_VULRE_FW_NAME }}'
+    state: present
+
+- name: add firewall rule
+  local_action:
+    module: vultr_firewall_rule
+    group: '{{ SHADOWSOCKS_VULRE_FW_NAME }}'
+    protocol: '{{ item.protocol }}'
+    start_port: '{{ item.s_port }}'
+    end_port: '{{ item.e_port }}'
+    cidr: '{{ item.cidr }}'
+    state: present
+  with_items:
+    - {cidr: 101.80.197.6/32, s_port: 80, e_port: 80, protocol: tcp}
+    - {cidr: 101.80.197.6/32, s_port: 443, e_port: 443, protocol: tcp}
+    - {cidr: 101.80.197.6/32, s_port: 22, e_port: 22, protocol: tcp}
+
+- name: delete firewall rule
+  local_action:
+    module: vultr_firewall_rule
+    group: '{{ SHADOWSOCKS_VULRE_FW_NAME }}'
+    protocol: '{{ item.protocol }}'
+    start_port: '{{ item.s_port }}'
+    end_port: '{{ item.e_port }}'
+    cidr: '{{ item.cidr }}'
+    state: absent
+  with_items:
+    - {cidr: 17.17.17.0/24, s_port: 80, e_port: 80, protocol: tcp}
+    - {cidr: 17.17.17.0/24, s_port: 443, e_port: 443, protocol: tcp}
+    - {cidr: 17.17.17.0/24, s_port: 22, e_port: 22, protocol: tcp}

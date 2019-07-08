@@ -1,0 +1,6 @@
+---
+# tasks file for common
+- include: ssh.yml
+- include: yum.yml
+- include: swap.yml
+- include: restart.yml

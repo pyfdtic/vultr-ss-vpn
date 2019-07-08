@@ -1,0 +1,8 @@
+- name: install yum pkgs
+  yum:
+    name:
+      - vim
+      - telnet
+      - wget
+      - '@Development Tools'
+    state: present

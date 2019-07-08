@@ -1,0 +1,5 @@
+---
+# vars file for common
+swap_path: /opt/ansible.swap
+dd_bs_size_mb: 2
+swap_count: 3000

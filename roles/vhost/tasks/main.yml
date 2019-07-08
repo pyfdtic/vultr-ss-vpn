@@ -1,0 +1,40 @@
+---
+# tasks file for vhost
+- name: create server
+  local_action:
+    module: vultr_server
+    name: "{{ VULTR_SERVER_NAME }}"
+    os: CentOS 7 x64
+    plan: 1024 MB RAM,25 GB SSD,1.00 TB BW
+    auto_backup_enabled: false
+    region: Tokyo
+    state: present
+  register: vultr_instances
+
+- name: Add new droplet to inventory
+  add_host:
+      name: "{{VULTR_SERVER_NAME}}"
+      groups: vultr
+      ansible_python_interpreter: /usr/bin/python
+      ansible_ssh_host: "{{ vultr_instances.vultr_server.v4_main_ip }}"
+      ansible_ssh_user: root
+      ansible_ssh_password: "{{ vultr_instances.vultr_server.default_password }}"
+      #ansible_ssh_private_key_file: "{{ do_ssh_private_key }}"
+
+- name: Wait for to listen on port 22
+  wait_for:
+      state: started
+      host: "{{ vultr_instances.vultr_server.v4_main_ip }}"
+      port: 22
+
+- name: Public IP Address
+  debug:
+      msg: your ip address is {{ vultr_instances.vultr_server.v4_main_ip }}
+
+- name: Show root login
+  debug:
+      msg: root password is {{ vultr_instances.vultr_server.default_password }}
+
+
+
+

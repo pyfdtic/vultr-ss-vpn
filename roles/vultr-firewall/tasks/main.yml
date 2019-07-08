@@ -16,9 +16,9 @@
     cidr: '{{ item.cidr }}'
     state: present
   with_items:
-    - {cidr: 101.80.197.6/32, s_port: 80, e_port: 80, protocol: tcp}
-    - {cidr: 101.80.197.6/32, s_port: 443, e_port: 443, protocol: tcp}
-    - {cidr: 101.80.197.6/32, s_port: 22, e_port: 22, protocol: tcp}
+    - {cidr: 111.80.187.6/32, s_port: 80, e_port: 80, protocol: tcp}
+    - {cidr: 131.80.147.6/32, s_port: 443, e_port: 443, protocol: tcp}
+    - {cidr: 101.180.117.6/32, s_port: 22, e_port: 22, protocol: tcp}
 
 - name: delete firewall rule
   local_action:

@@ -1,0 +1,49 @@
+- name: delete useless 80 firewall rule
+  local_action:
+    module: vultr_firewall_rule
+    group: '{{ SHADOWSOCKS_VULRE_FW_NAME }}'
+    protocol: tcp
+    start_port: 80
+    #    end_port: '{{ item.e_port }}'
+    cidr: '{{ item }}'
+    state: absent
+  with_items:
+    - 192.168.1.1/32
+
+- name: delete useless 22 firewall rule
+  local_action:
+    module: vultr_firewall_rule
+    group: '{{ SHADOWSOCKS_VULRE_FW_NAME }}'
+    protocol: tcp
+    start_port: 22
+    #    end_port: '{{ item.e_port }}'
+    cidr: '{{ item }}'
+    state: absent
+  with_items:
+    - 192.168.1.1/32
+
+- name: delete useless 443 firewall rule
+  local_action:
+    module: vultr_firewall_rule
+    group: '{{ SHADOWSOCKS_VULRE_FW_NAME }}'
+    protocol: tcp
+    start_port: 443
+    #    end_port: '{{ item.e_port }}'
+    cidr: '{{ item }}'
+    state: absent
+  with_items:
+    - 192.168.1.1/32
+
+# - name: delete firewall rule
+#   local_action:
+#     module: vultr_firewall_rule
+#     group: '{{ SHADOWSOCKS_VULRE_FW_NAME }}'
+#     protocol: '{{ item.protocol }}'
+#     start_port: '{{ item.s_port }}'
+#     # end_port: '{{ item.e_port }}'
+#     cidr: '{{ item.cidr }}'
+#     state: absent
+#   with_items:
+#     - {cidr: 54.80.232.71/32, s_port: 80, e_port: 80, protocol: tcp}
+#     - {cidr: 54.80.232.71/32, s_port: 443, e_port: 443, protocol: tcp}
+#     - {cidr: 54.80.232.71/32, s_port: 22, e_port: 22, protocol: tcp}

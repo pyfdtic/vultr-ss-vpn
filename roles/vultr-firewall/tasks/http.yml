@@ -1,0 +1,13 @@
+- name: add {{ PUBLIC_IP }} 80 firewall rule
+  local_action:
+    module: vultr_firewall_rule
+    group: '{{ SHADOWSOCKS_VULRE_FW_NAME }}'
+    protocol: tcp
+    start_port: 80
+    #    end_port: '{{ item.e_port }}'
+    cidr: '{{ PUBLIC_IP }}'
+    state: present
+
+
+    
+  

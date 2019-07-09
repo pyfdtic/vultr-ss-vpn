@@ -1,0 +1,5 @@
+- name: allow ping
+  local_action:
+    module: vultr_firewall_rule
+    group: '{{ SHADOWSOCKS_VULRE_FW_NAME }}'
+    protocol: icmp

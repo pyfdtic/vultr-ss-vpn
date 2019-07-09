@@ -1,3 +1,3 @@
 ---
 # vars file for vultr-firewall
-SHADOWSOCKS_VULRE_FW_NAME = 'ss'
+SHADOWSOCKS_VULRE_FW_NAME: SS

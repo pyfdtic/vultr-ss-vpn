@@ -10,4 +10,4 @@
 - include: http.yml
 - include: https.yml
 - include: ssh.yml
-- include: delete.yaml
+- include: delete.yml

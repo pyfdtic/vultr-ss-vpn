@@ -1,0 +1,16 @@
+- hosts: kube
+  gather_facts: no
+  tasks:
+  - name: rm /etc/kubernetes
+    shell: rm -fr /etc/kubernetes
+  - shell: rm -fr /var/lib/etcd
+  - shell: rm -fr /root/.kube
+  - shell: systemctl stop kubelet
+  - shell: modprobe -r ipip
+  - shell: iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X  # will reset iptables
+  - shell: ipvsadm --clear
+  - shell: swapoff -a
+  # - shell: cd /root/k8s-docker-desktop-for-mac && git checkout kube/v1.15.0
+  # - shell: cd /root/k8s-docker-desktop-for-mac && bash load_images.sh
+  # - shell: rpm -qa | grep kube | xargs yum remove -y
+  # - shell: yum install kubeadm -y
